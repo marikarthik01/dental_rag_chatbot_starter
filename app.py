@@ -831,28 +831,116 @@ def is_restart_request(message):
 # 8. GRADIO CHAT INTERFACE
 # ============================================================
 
+# appointment_state = gr.State(value=None)
+
+# demo = gr.ChatInterface(
+#     fn=respond,
+#     additional_inputs=[appointment_state],
+#     additional_outputs=[appointment_state],
+#     title="Dental Clinic Assistant",
+#     description=(
+#         "Ask questions about the clinic, book a 30-minute appointment, "
+#         "or cancel an existing appointment. Appointment requests are "
+#         "managed using the local demo database."
+#     ),
+#     examples=[
+#         ["What are the clinic opening hours?", None],
+#         ["What is the consultation fee?", None],
+#         ["Do you offer teeth cleaning?", None],
+#         ["I want to book an appointment", None],
+#         ["How do I cancel my appointment?", None],
+#     ],
+#     save_history=False,
+# )
+
+
+# if __name__ == "__main__":
+#     demo.launch()
+
+
+# ============================================================
+# 8. GRADIO CHAT INTERFACE — CUSTOM UI
+# ============================================================
+
+
+CUSTOM_CSS = """
+/* Make the application wider */
+.gradio-container {
+    max-width: 1500px !important;
+    width: 96% !important;
+    margin: 0 auto !important;
+    font-family: Inter, Arial, sans-serif !important;
+}
+
+/* Hide Gradio footer */
+footer,
+.built-with {
+    display: none !important;
+}
+
+/* Make the main chatbot box taller */
+.chatbot {
+    min-height: 650px !important;
+    height: 72vh !important;
+    max-height: 850px !important;
+    border-radius: 18px !important;
+}
+
+/* Improve heading */
+h1 {
+    font-size: 30px !important;
+    color: #42c9cc !important;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+    .gradio-container {
+        width: 100% !important;
+        padding: 10px !important;
+    }
+
+    .chatbot {
+        min-height: 450px !important;
+        height: 65vh !important;
+    }
+}
+"""
+
 appointment_state = gr.State(value=None)
 
 demo = gr.ChatInterface(
     fn=respond,
     additional_inputs=[appointment_state],
     additional_outputs=[appointment_state],
-    title="Dental Clinic Assistant",
+
+    autoscroll=True,
+
+    title="🦷 Sunrise Dental Clinic",
     description=(
-        "Ask questions about the clinic, book a 30-minute appointment, "
-        "or cancel an existing appointment. Appointment requests are "
-        "managed using the local demo database."
+        "Your friendly dental care assistant. "
+        "Ask about our services, check clinic information, "
+        "or book and manage your appointments."
     ),
+
     examples=[
         ["What are the clinic opening hours?", None],
-        ["What is the consultation fee?", None],
+        ["What services do you offer?", None],
         ["Do you offer teeth cleaning?", None],
         ["I want to book an appointment", None],
-        ["How do I cancel my appointment?", None],
+        # ["How do I cancel my appointment?", None],
     ],
+
     save_history=False,
 )
 
-
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(
+        css=CUSTOM_CSS,
+        theme=gr.themes.Soft(
+            primary_hue="teal",
+            secondary_hue="slate",
+            neutral_hue="slate",
+            radius_size="lg",
+            spacing_size="lg",
+        ),
+    )

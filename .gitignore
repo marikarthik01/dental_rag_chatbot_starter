@@ -1,5 +1,35 @@
+
+# Environment variables and secrets
 .env
+.env.*
+!.env.example
+
+# Python virtual environment
 .venv/
+venv/
+
+# Python cache and compiled files
 __pycache__/
+*.py[cod]
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated vector database
 chroma_db/
+
+# Gradio local files
 .gradio/
+
+# Test and development artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
